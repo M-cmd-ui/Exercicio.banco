@@ -1,0 +1,200 @@
+programa {
+	
+inclua biblioteca Util --> u
+	funcao inicio() {
+		
+// VARIAVEIS
+	
+		cadeia nome ,resposta=""
+		inteiro opcao,agencia_conta = 0,numero_conta = 0,digito_contaCC = 1,digito_contaCP=0
+		logico menu = verdadeiro
+		real valor,saldo_corrente = 0.0,saldo_poupanca = 0.0
+		
+// CRIANDO A CONTA DO USUÁRIO COM AS SEGUINTES PERGUNTAS:
+		escreva("Digite seu nome: ")
+		leia(nome)
+		escreva("Digite o numero de Agencia: ")
+		leia(agencia_conta)
+		escreva("Digite o numero de conta: ")
+		leia(numero_conta)
+		
+		
+// DEPOSITO INCIAL
+// CASO DIGITE 1 O DEPOSITO VAI SER REALIZADO E SUA CONTA FOI CRIADA COM SUCESSO E EM SEGUIDA VEM O MENU
+// CASO DIGITE 2 O DEPOSITO NÃO VAI SER REALIZADO ,POREM A SUA CONTA FOI CRIADA COM SUCESSO E EM SEGUIDA VEM O MENU
+// U.AGUARDE () -> INTERVALO DE TEMPO EM MILISSEGUNDOS DURANTE O QUAL PROGRAMA FICARÁ PAUSADO
+// LIMPA() -> PARA LIMPAR A TELA DO CONSOLE
+		 
+		escreva("Deseja realizar deposito inicial ? digite 1 para sim e 2 para nao:")
+		escreva("\n opção: ")
+		leia(opcao)
+
+// VERIFICAR A OPÇÃO SELECIONADA
+
+		escolha(opcao) {
+			caso 1:
+// PRIMEIRO DEPÓSITO A SER RELIAZADO E EM SEGUIDA O VALOR VAI PARA CONTA CORRENTE
+				escreva("Informe o valor do deposito: ")
+				leia(valor)
+				saldo_corrente += valor
+				limpa()
+				escreva("Deposito realizado com sucesso !\n")
+				limpa()
+				u.aguarde(1000)
+				escreva("Conta criada com sucesso! \n")
+		          u.aguarde(1000)
+		          limpa()
+		          escreva("\tSeja Bem Vindo \n")
+		          u.aguarde(1000)
+		          limpa()
+				pare
+			caso 2:
+				escreva("Conta criada com sucesso! \n")
+				limpa()
+				
+
+		}
+
+// MENU DE OPÇÕES
+// CASO DIGITE 1 VOCÊ VAI ENTRAR NO MENU DE OPÇÕES DA CONTA CORRENTE
+// CASO DIGITE 2 VOCÊ VAI ENTRAR NO MENU DE OPÇÕES DA CONTA POUPANÇA
+ 
+               
+		faca {
+			
+			escreva("\nEscola uma opção : \n")
+			escreva("\n")
+	      	escreva("1 -  Conta Corrente\n")
+	      	escreva("2 -  Conta Poupança\n")
+	      	escreva("0 -  Sair\n")
+			leia(opcao)
+			limpa()
+			escolha(opcao) {
+                
+				caso 1: 
+// SELECIONANDO A OPÇÃO 1 VOCE VAI ENCONTRAR A OPÇÔES DE SAQUE, DEPÓSITO E EXIBIR SEU SALDO.
+// EM SEGUIDA VOCÊ VAI ENCONTRAR INFORMAÇÕES DETALHADAS DE COMO FUNCIONA CADA OPERAÇÃO
+					escreva("Escolha uma opção:\n")
+					escreva("1 - Saque\n")
+					escreva("2 - Depósito\n")
+					escreva("3 - Exibir saldo\n")
+					escreva("0 -  Sair\n")
+			         	leia(opcao)
+			         	limpa()
+			         	escolha(opcao) {
+			         	
+			         		caso 1:
+// CASO DIGITE UM VALOR MAIOR QUE O SEU SALDO NA CONTA , A OPERAÇÃO NÃO VAI SER REALIZADA 
+// E EM SEGUIDA VAI APARECER A MENSAGEM DE -SALDO INSUFICIENTE-
+// CASO CONTRARIO , DIGITANDO O VALOR MENOR OU IGUAL O SALDO DA CONTA O SAQUE SERA REALIZADO COM SUCESSO
+//E EM SEGUIDA VAI APARECER A MENSAGEM DE -SAQUE REALIZADO COM SUCESSO-
+							escreva("Digite o valor do saque: ")
+				            	leia(valor)
+							limpa()
+					            se(valor > saldo_corrente) {
+					               escreva("Saldo insuficiente.")
+					               u.aguarde(1000)
+								limpa()					            	
+					            } senao {
+					               saldo_corrente -= valor
+					               escreva("Saque realizado com sucesso.")
+					               u.aguarde(1000)
+								limpa()
+					            }
+			         			pare
+			         		caso 2:
+// OPÇÃO 2 CASO DESEJE REALIZAR UM DEPOSITO NA SUA CONTA 
+			         			escreva("Digite o valor do deposito: ")
+							leia(valor)
+						  	se(valor > saldo_corrente) {
+					               escreva("Saldo insuficiente.")
+					               u.aguarde(2000)
+								limpa()					            	
+				            	} senao {
+								saldo_corrente += valor
+								limpa()
+								escreva("Deposito realizado com sucesso !\n")
+								u.aguarde(2000)
+								limpa()
+				            	}
+			         			pare
+			         		caso 3:
+//OPÇÃO 3 CASO DESEJE EXIBIR O SALDO DA SUA CONTA ONDE VOCÊ VAI ENCONTRAR SUAS INFORMAÇÕES DE 
+// AGENCIA, CONTA E NOME
+							escreva("Agência: ", agencia_conta)
+							escreva("\nNúmero da Conta Corrente: ", numero_conta," - ", digito_contaCC)
+							escreva("\nNome do Titular: "+ nome)
+							escreva("\nSaldo da Conta Corrente: ", saldo_corrente)
+							escreva("\n\nPrecione ENTER para voltar para o menu")
+							leia(resposta)
+							limpa()
+			         			pare
+			         	}
+					pare
+				caso 2: 
+// OPÇÃO POUPANÇA E EM SEGUIDA INFORMAÇÕES DETALHADA SOBRE CADA OPERAÇÃO	
+					escreva("Escolha uma opção:\n")
+					escreva("1 - Aplicar na poupança\n")
+					escreva("2 - Resgate\n")
+					escreva("3 - Exibir saldo\n")
+					escreva("0 -  Sair\n")
+					leia(opcao)
+					limpa()
+					escolha(opcao) {
+				   
+						caso 1:
+//OPÇÃO 1 CASO DESEJE APLICAR UM VALOR NA SUA CONTA POUPANÇA
+							escreva("Digite o valor a ser aplicado na poupança:")
+							leia(valor)
+							saldo_poupanca += valor
+							saldo_corrente -= valor
+							limpa()
+							escreva("Aplicação realizada com sucesso.\n")
+							u.aguarde(1000)
+							limpa()
+							pare
+						caso 2:
+// OPÇÃO 2 CASO DESEJE RESGATAR O DINHEIRO DA CONTA POUPANÇA PARA CONTA CORRENTE , ONDE O
+//DINHEIRO SAI DE UMA OPERAÇÃO E VAI PARA OUTRA
+							escreva("Digite o valor do resgate:")
+							leia(valor)
+							se(valor > saldo_poupanca) {
+								escreva("Saldo insuficiente.")
+								u.aguarde(2500)
+								limpa()
+							} senao {						
+								saldo_poupanca -= valor
+								saldo_corrente += valor
+								escreva("Resgate realizado com sucesso.")
+								u.aguarde(2500)
+								limpa()
+							}
+							pare 
+						caso 3:
+//OPÇÃO 3 CASO DESEJE EXIBIR O SALDO DA SUA CONTA ONDE VOCÊ VAI ENCONTRAR SUAS INFORMAÇÕES DE 
+// AGENCIA, CONTA E NOME
+							escreva("Agência: ", agencia_conta)
+							escreva("\nNúmero da Conta Poupança: ", numero_conta," - ", digito_contaCP)
+							escreva("\nNome do Titular: "+ nome)
+							escreva("\nSaldo da Conta Poupança: ", saldo_poupanca)
+							escreva("\n\nPrecione ENTER para voltar para o menu")
+							leia(resposta)
+							limpa()
+							pare
+						}
+						pare
+				caso 0:
+					escreva("Agência: ", agencia_conta)
+					escreva("\nNúmero da Conta Corrente: ", numero_conta," - ", digito_contaCC)
+					escreva("\nNome do Titular: "+ nome)
+					escreva("\n\nPrecione ENTER para entrar na conta")
+					leia(resposta)
+					limpa()
+					pare
+			}
+
+
+		} enquanto(menu == verdadeiro)
+		
+	}
+}
